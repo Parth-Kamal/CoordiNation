@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interdepartmental Cooperation Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css' rel='stylesheet' />
+    <link href='https://unpkg.com/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha512-kBv8FTbf3HxJHyK5RoBnnLFOQhbfsxMlEj5I1v/NBhR3s4GlDCN5bdcmMQuJ7G06rJY6dqOF7TDVToV7irGpFw==" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <header class="sticky-header">
+        <div class="container">
+            <h1 class="logo">Interdepartmental Cooperation Platform</h1>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+                    <li><a href="#tasks" class="nav-link">Tasks</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#resource-management" class="nav-link">Resources</a></li>
+                    <li><a href="#calendar" class="nav-link">Calendar</a></li>
+                    <li><a href="#profiles" class="nav-link">Profiles</a></li>
+                    <li><a href="#map-section" class="nav-link">Location</a></li>
+                    <li><a href="#documents" class="nav-link">Documents</a></li>
+                    <li><a href="#forum" class="nav-link">Forum</a></li>
+                    <li><a href="#feedback" class="nav-link">Feedback</a></li>
+                    <li><a href="#login" class="nav-link">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section">
+            <div class="container">
+                <h2>Dashboard</h2>
+                <div class="dashboard-overview grid-container">
+                    <div class="dashboard-item card">
+                        <h3>Total Departments</h3>
+                        <p id="total-departments">10</p>
+                    </div>
+                    <div class="dashboard-item card">
+                        <h3>Ongoing Projects</h3>
+                        <p id="ongoing-projects">5</p>
+                    </div>
+                    <div class="dashboard-item card">
+                        <h3>Active Tasks</h3>
+                        <p id="active-tasks">12</p>
+                    </div>
+                    <div class="dashboard-item card">
+                        <h3>Upcoming Events</h3>
+                        <p id="upcoming-events">3</p>
+                    </div>
+                </div>
+                <canvas id="projectChart" class="chart"></canvas>
+            </div>
+        </section>
+        <!-- Task Management Section  -->
+        <section id="tasks" class="section">
+            <div class="container">
+                <h2>Task Management</h2>
+                <div class="add-task-form">
+                    <input type="text" id="taskName" placeholder="Enter task name" />
+                    <select id="taskStatus">
+                        <option value="Pending">Pending</option>
+                        <option value="Ongoing">Ongoing</option>
+                    </select>
+                    <button class="btn primary-btn" onclick="addTask()">Add Task</button>
+                </div>
+                <div id="taskList" class="card">
+                    <h3>Active Tasks</h3>
+                    <ul>
+                        <!-- Tasks Section -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Management Section -->   
+         
+        <!-- SOON -->
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2>Projects</h2>
+                <div id="projectList" class="card">
+                    <h3>Ongoing Projects</h3>
+                    <ul>
+                        <li>Road Expansion - <strong>Lead: Public Works</strong></li>
+                        <li>Urban Greenery - <strong>Lead: Environmental Dept.</strong></li>
+                        <li>Smart Water System - <strong>Lead: Water Resources</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resource Management Section -->
+        <section id="resource-management" class="section">
+            <div class="container">
+                <h2>Resource Management</h2>
+                <button class="btn primary-btn" onclick="addResource()">Add Resource</button>
+                <div id="resourceList" class="card">
+                    <h3>Available Resources</h3>
+                    <ul>
+                        <li>Excavator - <strong>Status: Available</strong></li>
+                        <li>Water Pump - <strong>Status: In Use</strong></li>
+                        <li>Surveying Equipment - <strong>Status: Available</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chatbot Section -->
+        <div id="chatbot">
+            <div id="chatbot-button" onclick="toggleChat()">
+                <img src="bot.png" alt="Chatbot" />
+            </div>
+        
+            <div id="chatbot-window" style="display: none;">
+                <div id="chatbot-header">
+                    <h4>How can I help you?</h4>
+                    <button id="close-button" onclick="toggleChat()">×</button>
+                </div>
+        
+                <!-- Chatbot messages section -->
+                <div id="chatbot-messages">
+                </div>
+        
+                <!-- Input section to type messages -->
+                <div id="chatbot-input-container">
+                    <input type="text" id="chatbot-input" placeholder="Type your message...">
+                    <button id="send-button">Send</button>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Calendar Section -->
+        <section id="calendar" class="section">
+            <div class="container">
+                <h2>Event Calendar</h2>
+                <div id="calendarContainer" class="card">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- User Profiles Section -->
+        <section id="profiles" class="section">
+            <div class="container">
+                <h2>User Profiles</h2>
+                <button class="btn primary-btn" onclick="viewProfiles()">View Profiles</button>
+                <div id="profileList" class="card">
+                    <h3>Profiles</h3>
+                    <ul>
+                        <!-- Profile Details -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- Map Section -->
+        <section id="map-section" class="section">
+            <div class="container">
+                <h2>Work Location Map</h2>
+                <div id="map" style="height: 400px;"></div>
+            </div>
+        </section>
+
+
+
+        <!-- Document Management Section -->
+        <section id="documents" class="section">
+            <div class="container">
+                <h2>Document Management</h2>
+                <input type="file" id="documentInput" accept=".pdf, image/*" style="display: none;" onchange="handleFileUpload(event)" />
+                <button class="btn primary-btn" onclick="document.getElementById('documentInput').click()">Upload Document</button>
+                <div id="documentList" class="card">
+                    <h3>Documents</h3>
+                    <ul id="documentsUl">
+                        <!-- Dynamic document entries will be inserted here -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        
+
+        <!-- Forum Section -->
+        <section id="forum" class="section">
+            <div class="container">
+                <h2>Discussion Forum</h2>
+                <div id="forumPosts" class="card">
+                    <p>No posts yet. Start a discussion!</p>
+                </div>
+                <textarea id="newPost" class="textarea" placeholder="Write a new post..."></textarea>
+                <button class="btn primary-btn" onclick="addPost()">Post</button>
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section id="feedback" class="section">
+            <div class="container">
+                <h2>Feedback</h2>
+                <form id="feedbackForm">
+                    <textarea id="feedbackText" class="textarea" placeholder="Your feedback..." required></textarea>
+                    <button class="btn primary-btn" type="submit">Submit</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Interdepartmental Cooperation Platform</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha512-WzBfl/YMYuh/v1P6nEAgOTdNf2gnU4PC8TLF4Y7l5DjY7n0hG+RoOt4OgkmF7gYKo1TfSAZ/RP3mU1OEJZQGMA==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js'></script>
+    <script src='https://unpkg.com/fullcalendar@5.10.1/main.min.js'></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
