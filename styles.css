@@ -32,7 +32,7 @@ body {
     /* background-color: rgba(41, 53, 60, 0.9); */
     background-color: rgba(255, 255, 255, 0.9);
     color: var(--text-dark);
-    padding: 20px 0;
+    padding: 15px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     position: fixed;
     width: 100%;
@@ -41,13 +41,44 @@ body {
     backdrop-filter: blur(5px);
 }
 
-.logo {
-    color: var(--darkest-blue);
-    text-align: center;
-    margin: 0;
-    font-size: 26px;
-    font-weight: 700;
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 20px; 
+    background-color: transparent; 
 }
+
+
+.header-container .logo {
+    font-size: 26px;
+    font-size: 1.5rem; 
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    flex-grow: 1; 
+    color: var(--darkest-blue);
+}
+
+.header-container .nav-login {
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #18ADB5;
+    margin-left: auto; 
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .header-container .nav-login {
+        margin: 10px 0 0;
+    }
+}
+
 
 .nav-list {
     list-style: none;
@@ -374,3 +405,187 @@ footer {
     text-align: center;
 }
 
+
+
+/* Login and SignUp Styles */
+.login-hero{
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    background: #FFFFFF;
+    margin-top: 50px;
+}
+.login-form-box{
+    width: 380px;
+    height: 480px;
+    position: relative;
+    margin: 6% auto;
+    background: #F2F2F2;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.login-button-box{
+    width: 230px;
+    margin: 23px auto;
+    position: relative;
+    box-shadow: 0 0 7px 4px #d8e6e6;
+    border-radius: 30px;
+    
+}
+.login-toggle-btn{
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    
+}
+#login-btn{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 120px;
+    height: 100%;
+    background: #18ADB5;
+    border-radius: 30px;
+    transition:  .5s;
+}
+
+.login-input-group{
+    top: 150px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+.login-input-field{
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: #fff;
+    border-radius: 5px;
+}
+.login-submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: #18ADB5;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    color: #fff;
+}
+.login-check-box{
+    margin: 25px 10px 30px 0;
+}
+.terms{
+    color: #000;
+    font-size: 12px;
+    bottom: 68px;
+    position: absolute;
+}
+
+#login{
+    left: 50px;
+}
+#register{
+    left: 450px;
+}
+#toggle-login{
+    color: white;
+}
+
+.terms-color{
+    color:#18ADB5;
+    cursor:pointer;
+}
+.radio-group {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    margin-top: 18px;
+}
+
+.radio-label {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #18ADB5;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+.radio-label input[type="radio"] {
+    display: none;
+}
+
+
+.radio-label input[type="radio"]:checked + label {
+    background-color: #18ADB5;
+    color: white;
+}
+.selected {
+    background-color: #18ADB5;
+    color: white;
+}
+
+.google-btn-container {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 8px 10px;
+    background-color: white;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    width: 85%; 
+    max-width: 400px;
+    justify-content: center;
+}
+
+
+.google-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+/* Hover effect */
+.google-btn:hover {
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .google-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+    .google-logo {
+        width: 20px;
+        height: 20px;
+    }
+}

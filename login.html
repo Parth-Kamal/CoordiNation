@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login And SignUp</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="sticky-header">
+      <div class="container">
+        <div class="header-container">
+          <h1 class="logo">Interdepartmental Cooperation Platform</h1>
+          <a href="/index.html" class="nav-login">Home</a>
+        </div>
+        <nav>
+          <ul class="nav-list">
+            <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+            <li><a href="#tasks" class="nav-link">Tasks</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li>
+              <a href="#resource-management" class="nav-link">Resources</a>
+            </li>
+            <li><a href="#calendar" class="nav-link">Calendar</a></li>
+            <li><a href="#profiles" class="nav-link">Profiles</a></li>
+            <li><a href="#map-section" class="nav-link">Location</a></li>
+            <li><a href="#documents" class="nav-link">Documents</a></li>
+            <li><a href="#forum" class="nav-link">Forum</a></li>
+            <li><a href="#feedback" class="nav-link">Feedback</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="login-hero">
+      <div class="login-form-box">
+        <div class="login-button-box">
+          <div id="login-btn"></div>
+          <button
+            type="button"
+            id="toggle-login"
+            class="login-toggle-btn"
+            onclick="login()"
+          >
+            Login In
+          </button>
+          <button
+            type="button"
+            id="toggle-register"
+            class="login-toggle-btn"
+            onclick="register()"
+          >
+            Register
+          </button>
+        </div>
+        <form id="login" class="login-input-group">
+          <input
+            type="text"
+            class="login-input-field"
+            placeholder="User Id"
+            required
+          />
+          <input
+            type="password"
+            class="login-input-field"
+            placeholder="Enter Password"
+            required
+          />
+          <input type="checkbox" class="login-check-box" /><span class="terms"
+            >I agree to the
+            <span class="terms-color"> Terms and Condition </span></span
+          >
+          <button type="submit" class="login-submit-btn">Log In</button>
+           
+        </form>
+        <div class="google-btn-container">
+            <button class="google-btn">
+                <img
+                    src="https://w7.pngwing.com/pngs/882/225/png-transparent-google-logo-google-logo-google-search-icon-google-text-logo-business-thumbnail.png"
+                    alt="Google Logo"
+                    class="google-logo"
+                />
+                <span class="btn-text">Log in with Google</span>
+            </button>
+        </div>
+
+        <form id="register" class="login-input-group">
+          <input
+            type="text"
+            class="login-input-field"
+            placeholder="User Id"
+            required
+          />
+          <input
+            type="email"
+            class="login-input-field"
+            placeholder="Email Id"
+            required
+          />
+          <input
+            type="password"
+            class="login-input-field"
+            placeholder="Enter Password"
+            required
+          />
+          <div class="radio-group">
+            <label class="radio-label">
+              <input
+                type="radio"
+                name="role"
+                value="team-leader"
+                class="role-radio"
+                required
+              />
+              Team Leader
+            </label>
+            <label class="radio-label">
+              <input
+                type="radio"
+                name="role"
+                value="member"
+                class="role-radio"
+                required
+              />
+              Member
+            </label>
+          </div>
+          <input type="checkbox" class="login-check-box" /><span class="terms"
+            >I agree to the
+            <span class="terms-color"> Terms and Condition </span></span
+          >
+          <button type="submit" class="login-submit-btn">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      var x = document.getElementById("login");
+      var y = document.getElementById("register");
+      var z = document.getElementById("login-btn");
+      var w = document.getElementById("toggle-login");
+      var v = document.getElementById("toggle-register");
+
+      function register() {
+        x.style.left = "-400px";
+        y.style.left = "50px";
+        z.style.left = "110px";
+        v.style.color = "#fff";
+        w.style.color = "#000";
+      }
+
+      function login() {
+        x.style.left = "50px";
+        y.style.left = "450px";
+        z.style.left = "0px";
+        w.style.color = "#fff";
+        v.style.color = "#000";
+      }
+
+      const radioButtons = document.querySelectorAll(".role-radio");
+
+      radioButtons.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          radioButtons.forEach((btn) => {
+            btn.parentElement.classList.remove("selected");
+          });
+          radio.parentElement.classList.add("selected");
+        });
+      });
+    </script>
+  </body>
+</html>
