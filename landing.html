@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Landing Page</title>
+    
+  </head>
+  <body>
+    <div class="landing-container">
+      <nav>
+        <div class="nav__logo">Platform</div>
+        <ul class="nav__links">
+          <li class="link"><a href="#home">Home</a></li>
+          <li class="link"><a href="#about">About Us</a></li>
+          <li class="link"><a href="#">Contact</a></li>
+        </ul>
+        <button class="btn">
+          <a href="/login.html" style="text-decoration: none; color: #fff"
+            >Register Now</a
+          >
+        </button>
+      </nav>
+      <header class="header">
+        <div id="home" class="content">
+          <h1><span>Smart Urban</span><br />Collaboration Platform</h1>
+          <p>
+            A digital solution for seamless cooperation between city
+            Departments. Streamline resource sharing, project planning, and
+            unified implementation across agencies. Enhance coordination to
+            minimize delays and optimize urban planning.
+          </p>
+          <button class="btn">
+            <a href="/login.html" style="text-decoration: none; color: #fff"
+              >Get Started</a
+            >
+          </button>
+        </div>
+        <div class="landing-image">
+          <span class="image__bg"></span>
+          <img src="./images/header-bg.webp" alt="header image" />
+          <div class="image__content image__content__1">
+            <span><i class="ri-user-3-line"></i></span>
+            <div class="details">
+              <h4>20+</h4>
+              <p>Active Departments</p>
+            </div>
+          </div>
+          <div class="image__content image__content__2">
+            <ul>
+              <li>
+                <span><i class="ri-check-line"></i></span>
+                Join Now and Enhance Inter-departmental Cooperation
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      <header id="about" class="header">
+        <div class="landing-image about-image">
+          <span class="image__bg"></span>
+          <img src="./images/about.webp" alt="header image" />
+        </div>
+
+        <div id="home" class="content">
+          <h1><span>About Us</span></h1>
+          <p>
+            Our platform is designed to bring together city departments,
+            agencies, and stakeholders to foster inter-departmental cooperation
+            in urban development. By providing a unified space for sharing data,
+            resources, and expertise, we streamline project planning and
+            execution, ensuring efficient utilization of resources and
+            preventing project delays caused by miscoordination.
+          </p>
+          <p>
+            With features like real-time collaboration, task scheduling, and
+            project phasing tools, our platform enables seamless communication
+            and coordination across various city authorities. We aim to enhance
+            urban governance, reduce operational costs, and create smarter, more
+            organized cities for the future.
+          </p>
+        </div>
+      </header>
+    </div>
+    <div class="newsletter-container">
+        <h2>Sign up for our newsletter</h2>
+        <p>Stay up to date with the roadmap progress, announcements and exclusive discounts. Feel free to sign up with your email.</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <p class="privacy-notice">We care about the protection of your data. <a href="#">Read our Privacy Policy.</a></p>
+    </div>
+  </body>
+</html>

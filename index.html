@@ -10,32 +10,35 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha512-kBv8FTbf3HxJHyK5RoBnnLFOQhbfsxMlEj5I1v/NBhR3s4GlDCN5bdcmMQuJ7G06rJY6dqOF7TDVToV7irGpFw==" crossorigin=""/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="styles.css">
-    
+    <script>
+        if (!localStorage.getItem('hasRedirected')) {
+            localStorage.setItem('hasRedirected', 'true');
+            window.location.href = 'landing.html';
+        }
+    </script>
 </head>
 <body>
-    <header class="sticky-header">
-        <div class="container">
-            <div class="header-container">
-                <h1 class="logo">Interdepartmental Cooperation Platform</h1>
-                <a href="/login.html" class="nav-login">Login</a>
-            </div>
-            <nav>
-                <ul class="nav-list">
-                    <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
-                    <li><a href="#tasks" class="nav-link">Tasks</a></li>
-                    <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#resource-management" class="nav-link">Resources</a></li>
-                    <li><a href="#calendar" class="nav-link">Calendar</a></li>
-                    <li><a href="#profiles" class="nav-link">Profiles</a></li>
-                    <li><a href="#map-section" class="nav-link">Location</a></li>
-                    <li><a href="#documents" class="nav-link">Documents</a></li>
-                    <li><a href="#forum" class="nav-link">Forum</a></li>
-                    <li><a href="#feedback" class="nav-link">Feedback</a></li>
-                </ul>
-                
-            </nav>
+    <header class="navbar">
+        <span class="company-name">Interdepartmental Platform</span>
+        <div class="burger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-    </header>
+        <ul class="nav-list">
+          <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+          <li><a href="#tasks" class="nav-link">Tasks</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#resource-management" class="nav-link">Resources</a></li>
+          <li><a href="#calendar" class="nav-link">Calendar</a></li>
+          <li><a href="#profiles" class="nav-link">Profiles</a></li>
+          <li><a href="#map-section" class="nav-link">Location</a></li>
+          <li><a href="#documents" class="nav-link">Documents</a></li>
+          <li><a href="#forum" class="nav-link">Forum</a></li>
+          <li><a href="#feedback" class="nav-link">Feedback</a></li>
+          <li><a href="/login.html" class="nav-link">LogOut</a></li>
+        </ul>
+      </header>
 
     <main>
         <!-- Dashboard Section -->
@@ -232,6 +235,25 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js'></script>
     <script src='https://unpkg.com/fullcalendar@5.10.1/main.min.js'></script>
     <script src="script.js"></script>
+    <script>
+    //     function showSignup() {
+    //     document.getElementById("login-form").style.display = "none";
+    //     document.getElementById("signup-form").style.display = "block";
+    //   }
+
+    //   function showLogin() {
+    //     document.getElementById("signup-form").style.display = "none";
+    //     document.getElementById("login-form").style.display = "block";
+    //   }
+
+    //   // Toggle burger menu
+    //   function toggleMenu() {
+    //     const navList = document.querySelector(".nav-list");
+    //     const navbar = document.querySelector(".navbar");
+    //     navList.classList.toggle("show-menu");
+    //     navbar.classList.toggle("overlay-nav");
+    //   }
+    </script>
 </body>
 </html>
 
