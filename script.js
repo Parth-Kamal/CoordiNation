@@ -1,5 +1,4 @@
 
-
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize FullCalendar
     var calendarEl = document.getElementById('calendar');
@@ -422,4 +421,37 @@ document.getElementById("close-button").addEventListener("click", toggleChat);
 
 
 
+});
+
+
+function showSignup() {
+    document.getElementById("login-form").style.display = "none";
+    document.getElementById("signup-form").style.display = "block";
+  }
+
+  function showLogin() {
+    document.getElementById("signup-form").style.display = "none";
+    document.getElementById("login-form").style.display = "block";
+  }
+
+  // Toggle burger menu
+  function toggleMenu() {
+    const navList = document.querySelector(".nav-list");
+    const navbar = document.querySelector(".navbar");
+    navList.classList.toggle("show-menu");
+    navbar.classList.toggle("overlay-nav");
+  }
+  function closeMenu() {
+    const navList = document.querySelector(".nav-list");
+    const navbar = document.querySelector(".navbar");
+    navList.classList.remove("show-menu");
+    navbar.classList.remove("overlay-nav");
+}
+
+// Add event listeners to nav links
+document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll(".nav-link");
+    navLinks.forEach(link => {
+        link.addEventListener("click", closeMenu);
+    });
 });
