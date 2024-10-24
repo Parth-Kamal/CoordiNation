@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+
+    <div class="profile-container">
+      <h2>Welcome, <span id="username"></span>!</h2>
+      <div class="user-details">
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Department:</strong> <span id="department"></span></p>
+        <p><strong>Role:</strong> <span id="role"></span></p>
+      </div>
+    </div>
+
+    <script>
+      // Retrieve user data from local storage
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      if (user) {
+        // Display user details
+        document.getElementById("username").innerText = user.name;
+        document.getElementById("email").innerText = user.email;
+        document.getElementById("department").innerText = user.department;
+        document.getElementById("role").innerText = user.role;
+      } else {
+        alert("No user data found. Please log in.");
+        window.location.href = "login.html"; // Redirect to login if no user data
+      }
+    </script>
+  </body>
+</html>

@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Responsive Login/Signup Page</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css" />
     <script>
-      if (!localStorage.getItem('hasRedirected')) {
-          localStorage.setItem('hasRedirected', 'true');
-          window.location.href = 'landing.html';
+      if (!localStorage.getItem("hasRedirected")) {
+        localStorage.setItem("hasRedirected", "true");
+        window.location.href = "landing.html";
       }
-  </script>
+    </script>
   </head>
   <body>
     <!-- Responsive Navbar -->
@@ -22,26 +22,53 @@
     <div class="login-container">
       <div class="login-form-container" id="login-form">
         <h2>Login</h2>
-        <form action="#">
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <a href="./index.html"><button type="submit">Login</button></a>
+        <form id="loginForm">
+          <input type="email" placeholder="Email" id="loginEmail" required />
+          <input
+            type="password"
+            placeholder="Password"
+            id="loginPassword"
+            required
+          />
+          <button type="submit">Login</button>
         </form>
         <div class="login-toggle-form">
           <p class="login-link">
             Don't have an account?
-            <a  href="#" onclick="showSignup()">Sign Up</a>
+            <a href="#" onclick="showSignup()">Sign Up</a>
           </p>
         </div>
       </div>
 
       <div class="login-form-container" id="signup-form" style="display: none">
         <h2>Sign Up</h2>
-        <form action="#">
-          <input type="text" placeholder="Username" required />
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <a href="./index.html"><button type="submit">Sign Up</button></a>
+        <form id="registerForm">
+          <input type="text" placeholder="Username" id="name" required />
+          <input type="email" placeholder="Email" id="email" required />
+          <input
+            type="password"
+            placeholder="Password"
+            id="password"
+            required
+          />
+          <select id="department" required>
+            <option value="">Select Department</option>
+            <option value="department1">Department 1</option>
+            <option value="department2">Department 2</option>
+          </select>
+          <div class="role-select">
+            <input type="radio" id="admin" name="role" value="admin" required />
+            <label for="admin">Admin</label>
+            <input
+              type="radio"
+              id="official"
+              name="role"
+              value="official"
+              required
+            />
+            <label for="official">Official</label>
+          </div>
+          <button type="submit">Sign Up</button>
         </form>
         <div class="login-toggle-form">
           <p class="login-link">
@@ -63,6 +90,65 @@
         document.getElementById("signup-form").style.display = "none";
         document.getElementById("login-form").style.display = "block";
       }
+
+      // Link to backend
+      const apiURL = "http://localhost:8000/auth";
+
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const department = document.getElementById("department").value;
+          const role = document.querySelector(
+            'input[name="role"]:checked'
+          ).value;
+
+          try {
+            const response = await fetch(`${apiURL}/register`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name, email, password, department, role }),
+            });
+            const result = await response.json();
+            alert(result.message);
+          } catch (error) {
+            console.error(error);
+            alert("Failed to register");
+          }
+        });
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const email = document.getElementById("loginEmail").value;
+          const password = document.getElementById("loginPassword").value;
+
+          try {
+            const response = await fetch(`${apiURL}/login`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, password }),
+            });
+            const result = await response.json();
+            if (result.success) {
+              // Store token and user data in localStorage
+              localStorage.setItem("token", result.token);
+              localStorage.setItem("user", JSON.stringify(result.user)); // Store entire user object
+
+              alert("Login successful");
+              window.location.href = "index.html"; // Redirect after login
+            } else {
+              alert(result.message);
+            }
+          } catch (error) {
+            console.error(error);
+            alert("Failed to login");
+          }
+        });
     </script>
   </body>
 </html>
