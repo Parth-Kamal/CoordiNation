@@ -431,7 +431,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 99vh;
   background-color: #f4f4f4;
 }
 .login-form-container {
@@ -500,6 +500,64 @@ footer {
 }
 .login-link a:hover{
     background: transparent;
+}
+.role-select {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.role-select label {
+  margin-right: 10px;
+}
+
+#department {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  margin-bottom: 4px;
+}
+
+/* Custom arrow for dropdown */
+#department::after {
+  content: "▼";
+  font-size: 12px;
+  color: #888;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Change border color on focus */
+#department:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Optional for responsive behavior */
+@media (max-width: 600px) {
+  #department {
+    max-width: 100%;
+    padding: 8px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-form-container {
+    max-width: 90%;
+  }
 }
 
 
@@ -756,4 +814,87 @@ nav {
 
 .privacy-notice a:hover {
   text-decoration: underline;
+}
+
+
+
+/* Profile container styling */
+
+.profile-container {
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border-radius: 15px;
+}
+
+.profile-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+
+.user-details p {
+  margin: 20px 0;
+}
+
+#editForm {
+  margin-top: 20px;
+}
+
+#edit-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+#edit-button:hover {
+  background-color: #373535;
+}
+
+#edit-section {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 10px;
+  display: none;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 50;
+}
+
+.blurred {
+  filter: blur(5px);
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    width: 90%;
+  }
+  #edit-section {
+    width: 90%;
+  }
 }
