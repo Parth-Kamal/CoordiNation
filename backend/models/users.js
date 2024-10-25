@@ -16,6 +16,10 @@ const usersSchema = new Schema(
          type: String,
          required: [true, "User should have a department"],
       },
+      bio:{
+         type: String,
+         default:"",
+      },
       role: { type: String, enum: ["admin", "official"], default: "official" },
       profilePic: { type: String, default: null },
    },
