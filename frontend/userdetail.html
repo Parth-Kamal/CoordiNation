@@ -11,7 +11,7 @@
         margin: 0;
         padding: 0;
       }
-      .b{
+      .b {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -46,8 +46,35 @@
         resize: none;
         height: 100px;
       }
+      .profile-pic-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+      }
 
- 
+      .profile-pic-container img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      @media (max-width: 600px) {
+        .profile-pic-container img {
+          width: 80px;
+          height: 80px;
+        }
+      }
+      #cancel-button {
+        background-color: #c0c0c0;
+        color: #000;
+        margin-top: 10px;
+      }
+
+      #cancel-button:hover {
+        background-color: #a8a8a8;
+      }
     </style>
   </head>
   <body>
@@ -76,6 +103,13 @@
     </header>
     <div class="b">
       <div class="profile-container">
+        <div class="profile-pic-container">
+          <img
+            id="profilePic"
+            src="https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small_2x/profile-icon-design-free-vector.jpg"
+            alt="Profile Picture"
+          />
+        </div>
         <h2 id="username"></h2>
         <div class="user-details" id="details-container">
           <p><strong>Email:</strong> <span id="email"></span></p>
@@ -85,22 +119,25 @@
           </p>
           <p><strong>Role:</strong> <span id="role"></span></p>
         </div>
-  
+
         <button id="edit-button">Edit Profile</button>
       </div>
-  
+
       <div id="overlay"></div>
-  
+
       <div id="edit-section">
         <h3>Edit Your Profile</h3>
-        <form id="edit-form">
+        <form id="edit-form" enctype="multipart/form-data">
           <label for="name">Name:</label>
           <input type="text" id="name" required />
           <label for="department">Department:</label>
           <input type="text" id="departmentInput" required />
           <label for="bio">Bio:</label>
           <textarea id="bio-input" required></textarea>
+          <label for="profile-image">Upload Profile Picture:</label>
+          <input type="file" id="profilePics" accept="image/*" />
           <button type="submit">Save Changes</button>
+          <button type="button" id="cancel-button">Cancel</button>
         </form>
       </div>
     </div>
@@ -143,25 +180,39 @@
         document.getElementById("bio-input").value = user.bio || "";
       });
 
+
+      const profilePic = document.getElementById("profilePic");
+      if (user && user.profilePic) {
+        profilePic.src = `http://localhost:8000${user.profilePic}`;
+      }
+
+      
       document
         .getElementById("edit-form")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
 
-          const updatedData = {
-            name: document.getElementById("name").value,
-            department: document.getElementById("departmentInput").value,
-            bio: document.getElementById("bio-input").value,
-          };
+          
+          const formData = new FormData();
+          formData.append("name", document.getElementById("name").value);
+          formData.append(
+            "department",
+            document.getElementById("departmentInput").value
+          );
+          formData.append("bio", document.getElementById("bio-input").value);
+
+          const profilePic = document.getElementById("profilePics").files[0];
+          if (profilePic) {
+            formData.append("profilePic", profilePic);
+          }
 
           try {
             const response = await fetch(`${apiURL}/update`, {
               method: "PUT",
               headers: {
-                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
               },
-              body: JSON.stringify(updatedData),
+              body: formData,
             });
 
             const result = await response.json();
@@ -174,6 +225,11 @@
               document.getElementById("department").innerText =
                 result.user.department;
 
+              
+              if (result.user.profilePic) {
+                profilePic.src = `http://localhost:8000${result.user.profilePic}`;
+              }
+
               if (result.user.bio) {
                 document.getElementById("bio-display").style.display = "block";
                 document.getElementById("bio").innerText = result.user.bio;
@@ -184,6 +240,7 @@
               editSection.style.display = "none";
               overlay.style.display = "none";
               detailsContainer.classList.remove("blurred");
+              window.location.reload();
             } else {
               alert(result.message || "Profile update failed");
             }
@@ -192,7 +249,9 @@
           }
         });
 
-      overlay.addEventListener("click", () => {
+        
+      const cancelButton = document.getElementById("cancel-button");
+      cancelButton.addEventListener("click", () => {
         editSection.style.display = "none";
         overlay.style.display = "none";
         detailsContainer.classList.remove("blurred");
