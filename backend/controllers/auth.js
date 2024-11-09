@@ -7,7 +7,7 @@ import Users from "../models/users.js";
 
 export const uploadProfilePic = upload.single("profilePic");
 
-export const updateUserWithProfilePic = async (req, res) => {
+export const updateUser = async (req, res) => {
    try {
       const { name, department, bio } = req.body;
       const userId = req.user._id;
