@@ -1,28 +1,14 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+import upload from "../config/multerConfig.js";
 import Users from "../models/users.js";
-import multer from "multer";
-import path from "path";
 
-// Set up multer storage
-const storage = multer.diskStorage({
-   destination: (req, file, cb) => {
-      cb(null, "uploads/");
-   },
-   filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname));
-   },
-});
-
-const upload = multer({ storage });
-
-// Endpoint for uploading profile picture
 export const uploadProfilePic = upload.single("profilePic");
 export const updateUserWithProfilePic = async (req, res) => {
    try {
       const { name, department, bio } = req.body;
-      const userId = req.user._id; // User ID from token
+      const userId = req.user._id;
       const profilePicPath = req.file ? `/uploads/${req.file.filename}` : undefined;
 
       const updatedUser = await Users.findByIdAndUpdate(
