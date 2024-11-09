@@ -1,20 +1,23 @@
 import bcrypt from "bcrypt";
+import fs from "fs";
 import jwt from "jsonwebtoken";
 
 import upload from "../config/multerConfig.js";
 import Users from "../models/users.js";
 
 export const uploadProfilePic = upload.single("profilePic");
+
 export const updateUserWithProfilePic = async (req, res) => {
    try {
       const { name, department, bio } = req.body;
       const userId = req.user._id;
+      const olfProfilePicPath = `./${req.user.profilePic}`;
       const profilePicPath = req.file ? `/uploads/${req.file.filename}` : undefined;
 
       const updatedUser = await Users.findByIdAndUpdate(
          userId,
          { name, department, bio, profilePic: profilePicPath },
-         { new: true }
+         { new: true },
       );
 
       if (!updatedUser) {
@@ -26,6 +29,14 @@ export const updateUserWithProfilePic = async (req, res) => {
          success: true,
          user: updatedUser,
       });
+
+      if (olfProfilePicPath && fs.existsSync(olfProfilePicPath)) {
+         fs.unlink(olfProfilePicPath, (err) => {
+            if (err) {
+               console.error("Error deleting old profile pic:", err);
+            }
+         });
+      }
    } catch (error) {
       res.status(500).json({
          message: "Internal Server Error",
@@ -33,7 +44,6 @@ export const updateUserWithProfilePic = async (req, res) => {
       });
    }
 };
-
 
 export const register = async (req, res) => {
    try {
@@ -100,4 +110,3 @@ export const login = async (req, res) => {
       });
    }
 };
-
