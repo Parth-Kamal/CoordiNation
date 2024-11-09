@@ -1,6 +1,6 @@
 import yup from "yup";
 
-import { createValidationMiddleware } from "./util/createValidationMiddleware.js";
+import { createValidationMiddleware } from "./utils/createValidationMiddleware.js";
 
 const registerSchema = yup.object({
    name: yup.string().min(3).max(100).required("Name is required"),
