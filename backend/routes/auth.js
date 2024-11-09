@@ -1,13 +1,15 @@
 import { Router } from "express";
-import { login, register, updateUser } from "../controllers/auth.js";
+
+import { login, register, updateUserWithProfilePic, uploadProfilePic } from "../controllers/auth.js";
 import { loginValidation, registerValidation } from "../middlewares/authValidation.js";
 import { protectedRoute } from "../middlewares/protectedRoute.js";
+
 
 const router = Router();
 
 router.route("/register").post(registerValidation, register);
 
 router.route("/login").post(loginValidation, login);
-router.route("/update").put(protectedRoute, updateUser);
+router.route("/update").put(protectedRoute, uploadProfilePic, updateUserWithProfilePic);
 
 export default router;
