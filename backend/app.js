@@ -1,7 +1,7 @@
 import compression from "compression";
+import cors from "cors";
 import express from "express";
 import morgan from "morgan";
-import cors from "cors";
 
 import auth from "./routes/auth.js";
 
