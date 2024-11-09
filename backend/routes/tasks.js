@@ -12,11 +12,11 @@ import { taskValidation } from "../middlewares/taskValidation.js";
 
 const router = Router();
 
-router.route("/").get(protectedRoute, getAllTasks);
+router.route("/").get(getAllTasks);
 
 router
    .route("/:id")
-   .get(protectedRoute, getTask)
+   .get(getTask)
    .post(adminRoute, taskValidation, createTask)
    .put(adminRoute, taskValidation, updateTask)
    .delete(adminRoute, deleteTask);

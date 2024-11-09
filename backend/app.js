@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 import auth from "./routes/auth.js";
 import tasks from "./routes/tasks.js";
 import globalErrorHandler from "./utils/globalErrorHandler.js";
+import { protectedRoute } from "./middlewares/protectedRoute.js";
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,6 +25,9 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(compression());
 
 app.use("/auth", auth);
+
+app.use(protectedRoute);
+
 app.use("/api/tasks", tasks);
 
 app.all("*", (req, res) => {
