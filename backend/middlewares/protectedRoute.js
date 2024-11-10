@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+
 import Users from "../models/users.js";
 
 export const protectedRoute = async (req, res, next) => {
@@ -26,4 +27,10 @@ export const protectedRoute = async (req, res, next) => {
          .status(401)
          .json({ message: "Not authorized, token failed", success: false });
    }
+};
+
+export const adminRoute = async (req, res, next) => {
+   if (req.user.role !== "admin")
+      return res.status(401).json({ message: "Not authorized, admin only", success: false });
+   next();
 };
