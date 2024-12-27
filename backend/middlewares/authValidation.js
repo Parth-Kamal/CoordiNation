@@ -1,5 +1,7 @@
 import yup from "yup";
 
+import { createValidationMiddleware } from "./utils/createValidationMiddleware.js";
+
 const registerSchema = yup.object({
    name: yup.string().min(3).max(100).required("Name is required"),
    email: yup
@@ -13,6 +15,8 @@ const registerSchema = yup.object({
    profilePic: yup.string().nullable(),
 });
 
+export const registerValidation = createValidationMiddleware(registerSchema);
+
 const loginSchema = yup.object({
    email: yup
       .string()
@@ -22,20 +26,12 @@ const loginSchema = yup.object({
    password: yup.string().min(8).max(20).required("Password is required"),
 });
 
-export const registerValidation = async (req, res, next) => {
-   try {
-      await registerSchema.validate(req.body, { strict: true });
-      next();
-   } catch (error) {
-      res.status(400).json({ message: "Bad Request", error });
-   }
-};
+export const loginValidation = createValidationMiddleware(loginSchema);
 
-export const loginValidation = async (req, res, next) => {
-   try {
-      await loginSchema.validate(req.body, { strict: true });
-      next();
-   } catch (error) {
-      res.status(400).json({ message: "Bad Request", error });
-   }
-};
+const updateSchema = yup.object({
+   name: yup.string().min(3).max(100).required("Name is required"),
+   department: yup.string().required("Department is required"),
+   bio: yup.string().nullable(),
+});
+
+export const updateValidation = createValidationMiddleware(updateSchema);
