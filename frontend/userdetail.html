@@ -6,24 +6,17 @@
     <title>User Profile</title>
     <link rel="stylesheet" href="./styles.css" />
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
       .b {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background-color: #f0f0f0;
       }
-
       button {
         display: block;
         width: 100%;
         padding: 10px;
-        background-color: #000;
+        background-color: #0077b6;
         color: white;
         border: none;
         border-radius: 30px;
@@ -31,7 +24,7 @@
       }
 
       button:hover {
-        background-color: #323030;
+        background-color: #023e8a;
       }
       input,
       select,
@@ -67,35 +60,52 @@
         }
       }
       #cancel-button {
-        background-color: #c0c0c0;
+        background-color: #c1d3fe;
         color: #000;
         margin-top: 10px;
       }
 
       #cancel-button:hover {
-        background-color: #a8a8a8;
+        background-color: #abc4ff;
       }
+      
     </style>
   </head>
   <body>
+    <div id="customAlert" class="alert-box">
+      <div class="alert-content">
+        <span class="alert-message" id="alertMessage"
+          >This is an alert message</span
+        >
+        <button onclick="closeAlert()" class="alert-button">OK</button>
+      </div>
+    </div>
     <header class="navbar">
-      <span class="company-name">Interdepartmental Platform</span>
+      <nav class="company-navbar">
+        <div class="company-navbar-left">
+          <img src="./images/logo.png" alt="Company Logo" class="company-logo" />
+          <span class="company-name">CitySyncIndia</span>
+        </div>
+        <div class="company-navbar-right">
+          <button class="company-contact-us">Contact Us</button>
+        </div>
+      </nav>
       <div class="burger" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
       </div>
       <ul class="nav-list">
-        <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
-        <li><a href="#tasks" class="nav-link">Tasks</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#resource-management" class="nav-link">Resources</a></li>
-        <li><a href="#calendar" class="nav-link">Calendar</a></li>
-        <li><a href="userdetail.html" class="nav-link">Profiles</a></li>
-        <li><a href="#map-section" class="nav-link">Location</a></li>
-        <li><a href="#documents" class="nav-link">Documents</a></li>
-        <li><a href="#forum" class="nav-link">Forum</a></li>
-        <li><a href="#feedback" class="nav-link">Feedback</a></li>
+        <li><a href="./index.html#dashboard" class="nav-link">Dashboard</a></li>
+        <li><a href="./index.html#tasks" class="nav-link">Tasks</a></li>
+        <li><a href="./index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="./index.html#resource-management" class="nav-link">Resources</a></li>
+        <li><a href="./index.html#calendar" class="nav-link">Calendar</a></li>
+        <li><a href="./index.htmluserdetail.html" class="nav-link">Profiles</a></li>
+        <li><a href="./index.html#map-section" class="nav-link">Location</a></li>
+        <li><a href="./index.html#documents" class="nav-link">Documents</a></li>
+        <li><a href="./index.html#forum" class="nav-link">Forum</a></li>
+        <li><a href="./index.html#feedback" class="nav-link">Feedback</a></li>
         <li>
           <a href="/login.html" id="logout-link" class="nav-link">LogOut</a>
         </li>
@@ -149,7 +159,7 @@
       const token = localStorage.getItem("token");
 
       if (!token) {
-        alert("No token found. Please log in.");
+        showAlert("No token found. Please log in.");
         window.location.href = "login.html";
       }
 
@@ -218,7 +228,7 @@
             const result = await response.json();
 
             if (result.success) {
-              alert("Profile updated successfully");
+              showAlert("Profile updated successfully");
               localStorage.setItem("user", JSON.stringify(result.user));
 
               document.getElementById("username").innerText = result.user.name;
@@ -242,7 +252,7 @@
               detailsContainer.classList.remove("blurred");
               window.location.reload();
             } else {
-              alert(result.message || "Profile update failed");
+              showAlert(result.message || "Profile update failed");
             }
           } catch (error) {
             console.error("Error updating profile:", error);

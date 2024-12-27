@@ -455,3 +455,12 @@ document.addEventListener("DOMContentLoaded", () => {
         link.addEventListener("click", closeMenu);
     });
 });
+
+function showAlert(message) {
+    document.getElementById("alertMessage").textContent = message;
+    document.getElementById("customAlert").style.display = "flex";
+  }
+
+  function closeAlert() {
+    document.getElementById("customAlert").style.display = "none";
+  }
