@@ -72,41 +72,41 @@ export const login = async (req, res) => {
       });
    }
 };
-   
-   export const updateUser = async (req, res) => {
-      try {
-         const { name, department, bio } = req.body;
-         const userId = req.user._id;
-         const olfProfilePicPath = `./${req.user.profilePic}`;
-         const profilePicPath = req.file ? `/uploads/${req.file.filename}` : undefined;
-   
-         const updatedUser = await Users.findByIdAndUpdate(
-            userId,
-            { name, department, bio, profilePic: profilePicPath },
-            { new: true },
-         );
-   
-         if (!updatedUser) {
-            return res.status(404).json({ message: "User not found", success: false });
-         }
-   
-         res.status(200).json({
-            message: "User updated successfully",
-            success: true,
-            user: updatedUser,
-         });
-   
-         if (olfProfilePicPath && fs.existsSync(olfProfilePicPath)) {
-            fs.unlink(olfProfilePicPath, (err) => {
-               if (err) {
-                  console.error("Error deleting old profile pic:", err);
-               }
-            });
-         }
-      } catch (error) {
-         res.status(500).json({
-            message: "Internal Server Error",
-            success: false,
+
+export const updateUser = async (req, res) => {
+   try {
+      const { name, department, bio } = req.body;
+      const userId = req.user._id;
+      const olfProfilePicPath = `./${req.user.profilePic}`;
+      const profilePicPath = req.file ? `/uploads/${req.file.filename}` : undefined;
+
+      const updatedUser = await Users.findByIdAndUpdate(
+         userId,
+         { name, department, bio, profilePic: profilePicPath },
+         { new: true },
+      );
+
+      if (!updatedUser) {
+         return res.status(404).json({ message: "User not found", success: false });
+      }
+
+      res.status(200).json({
+         message: "User updated successfully",
+         success: true,
+         user: updatedUser,
+      });
+
+      if (olfProfilePicPath && fs.existsSync(olfProfilePicPath)) {
+         fs.unlink(olfProfilePicPath, (err) => {
+            if (err) {
+               console.error("Error deleting old profile pic:", err);
+            }
          });
       }
-   };
+   } catch (error) {
+      res.status(500).json({
+         message: "Internal Server Error",
+         success: false,
+      });
+   }
+};

@@ -7,12 +7,10 @@ export const protectedRoute = async (req, res, next) => {
       const token = req.headers.authorization?.split(" ")[1];
 
       if (!token) {
-         return res
-            .status(401)
-            .json({ message: "Not authorized, no token", success: false });
+         return res.status(401).json({ message: "Not authorized, no token", success: false });
       }
 
-      const decoded = jwt.verify(token, process.env.JWT_SECRET||"verify");
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || "verify");
 
       const user = await Users.findById(decoded._id).select("-hashedPassword");
 
@@ -23,9 +21,7 @@ export const protectedRoute = async (req, res, next) => {
       req.user = user;
       next();
    } catch (error) {
-      return res
-         .status(401)
-         .json({ message: "Not authorized, token failed", success: false });
+      return res.status(401).json({ message: "Not authorized, token failed", success: false });
    }
 };
 
