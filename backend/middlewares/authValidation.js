@@ -4,11 +4,7 @@ import { createValidationMiddleware } from "./utils/createValidationMiddleware.j
 
 const registerSchema = yup.object({
    name: yup.string().min(3).max(100).required("Name is required"),
-   email: yup
-      .string()
-      .email("Invalid email format")
-      .max(100)
-      .required("Email is required"),
+   email: yup.string().email("Invalid email format").max(100).required("Email is required"),
    password: yup.string().min(8).max(20).required("Password is required"),
    department: yup.string().required("Department is required"),
    role: yup.string().oneOf(["admin", "official"]).default("official"),
@@ -18,11 +14,7 @@ const registerSchema = yup.object({
 export const registerValidation = createValidationMiddleware(registerSchema);
 
 const loginSchema = yup.object({
-   email: yup
-      .string()
-      .email("Invalid email format")
-      .max(100)
-      .required("Email is required"),
+   email: yup.string().email("Invalid email format").max(100).required("Email is required"),
    password: yup.string().min(8).max(20).required("Password is required"),
 });
 

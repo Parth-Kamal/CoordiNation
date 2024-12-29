@@ -1,11 +1,11 @@
 import { Schema, model } from "mongoose";
 
-const usersSchema = new Schema(
+const userSchema = new Schema(
    {
       name: { type: String, required: [true, "User should have a name"] },
       email: {
          type: String,
-         unique: true,
+         index: { unique: true },
          required: [true, "User should have an email"],
       },
       hashedPassword: {
@@ -26,8 +26,4 @@ const usersSchema = new Schema(
    { timestamps: true },
 );
 
-usersSchema.index({ email: 1 });
-
-const Users = model("Users", usersSchema);
-
-export default Users;
+export default model("Users", userSchema);
