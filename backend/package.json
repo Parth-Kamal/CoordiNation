@@ -13,6 +13,7 @@
    "type": "module",
    "dependencies": {
       "bcrypt": "^5.1.1",
+      "body-parser": "^1.20.3",
       "compression": "^1.7.4",
       "cookie-parser": "^1.4.7",
       "cors": "^2.8.5",
@@ -22,6 +23,7 @@
       "mongoose": "^8.7.2",
       "morgan": "^1.10.0",
       "multer": "^1.4.5-lts.1",
+      "nodemailer": "^6.9.16",
       "yup": "^1.4.0"
    },
    "devDependencies": {

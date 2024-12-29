@@ -13,12 +13,32 @@
     </script>
   </head>
   <body>
-    <!-- Responsive Navbar -->
+    <!-- Custom Alert Box -->
+    <div id="customAlert" class="alert-box">
+      <div class="alert-content">
+        <span class="alert-message" id="alertMessage"
+          >This is an alert message</span
+        >
+        <button onclick="closeAlert()" class="alert-button">OK</button>
+      </div>
+    </div>
+
     <header class="navbar">
-      <div class="company-name">Interdepartmental Platform</div>
+      <nav class="company-navbar">
+        <div class="company-navbar-left">
+          <img
+            src="./images/logo.png"
+            alt="Company Logo"
+            class="company-logo"
+          />
+          <span class="company-name">CitySyncIndia</span>
+        </div>
+        <div class="company-navbar-right">
+          <button class="company-contact-us">Contact Us</button>
+        </div>
+      </nav>
     </header>
 
-    <!-- Login/Signup Form Section -->
     <div class="login-container">
       <div class="login-form-container" id="login-form">
         <h2>Login</h2>
@@ -78,9 +98,9 @@
       </div>
     </div>
 
-    <!-- JavaScript to Toggle Forms and Burger Menu -->
+
+     <script src="./script.js"></script>
     <script>
-      // Toggle between login and signup forms
       function showSignup() {
         document.getElementById("login-form").style.display = "none";
         document.getElementById("signup-form").style.display = "block";
@@ -91,7 +111,6 @@
         document.getElementById("login-form").style.display = "block";
       }
 
-      // Link to backend
       const apiURL = "http://localhost:8000/auth";
 
       document
@@ -113,10 +132,10 @@
               body: JSON.stringify({ name, email, password, department, role }),
             });
             const result = await response.json();
-            alert(result.message);
+            showAlert(result.message);
           } catch (error) {
             console.error(error);
-            alert("Failed to register");
+            showAlert("Failed to register");
           }
         });
 
@@ -135,18 +154,17 @@
             });
             const result = await response.json();
             if (result.success) {
-              // Store token and user data in localStorage
               localStorage.setItem("token", result.token);
-              localStorage.setItem("user", JSON.stringify(result.user)); // Store entire user object
+              localStorage.setItem("user", JSON.stringify(result.user));
 
-              alert("Login successful");
-              window.location.href = "index.html"; // Redirect after login
+              showAlert("Login successful");
+              window.location.href = "index.html";
             } else {
-              alert(result.message);
+              showAlert(result.message);
             }
           } catch (error) {
             console.error(error);
-            alert("Failed to login");
+            showAlert("Failed to login");
           }
         });
     </script>
