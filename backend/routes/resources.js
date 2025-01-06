@@ -1,11 +1,11 @@
 import { Router } from "express";
 
 import {
-   getResource,
-   getAllResources,
    createResource,
-   updateResource,
    deleteResource,
+   getAllResources,
+   getResource,
+   updateResource,
 } from "../controllers/resources";
 import { adminRoute } from "../middlewares/protectedRoute";
 import { resourceValidation } from "../middlewares/resourceValidation";
