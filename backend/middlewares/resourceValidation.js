@@ -2,12 +2,14 @@ import yup from "yup";
 
 import { createValidationMiddleware } from "./utils/createValidationMiddleware.js";
 
-const taskSchema = yup
+const resourceSchema = yup
    .object({
       title: yup.string().min(3).max(100).required("Title is required"),
-      status: yup.string().oneOf(["pending", "ongoing"]).required("Status is required"),
+      description: yup.string().min(10).max(500).required("Description is required"),
       department: yup.string().min(3).max(100).required("Department is required"),
+      budgetAllocated: yup.number().required("Budget is required"),
+      imageUrl: yup.string().nullable(),
    })
    .noUnknown();
 
-export const taskValidation = createValidationMiddleware(taskSchema);
+export const resourceValidation = createValidationMiddleware(resourceSchema);

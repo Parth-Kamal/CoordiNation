@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { type } from "os";
 
 const resourceSchema = new Schema(
    {
@@ -13,6 +14,14 @@ const resourceSchema = new Schema(
       department: {
          type: String,
          required: [true, "Resource should be from a department"],
+      },
+      budgetAllocated: {
+         type: Number,
+         required: [true, "Resource should have a budget allocated"],
+      },
+      imageUrl: {
+         type: String,
+         default: null,
       },
    },
    { timestamps: true },
