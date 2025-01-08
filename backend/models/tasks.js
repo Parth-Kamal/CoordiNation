@@ -19,4 +19,6 @@ const taskSchema = new Schema(
    { timestamps: true },
 );
 
-export default model("Tasks", taskSchema);
+const Tasks = model("Tasks", taskSchema);
+
+export default Tasks;

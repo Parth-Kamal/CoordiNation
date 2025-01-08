@@ -77,7 +77,7 @@ export const updateUser = async (req, res) => {
    try {
       const { name, department, bio } = req.body;
       const userId = req.user._id;
-      const olfProfilePicPath = `./${req.user.profilePic}`;
+      const oldProfilePicPath = `./${req.user.profilePic}`;
       const profilePicPath = req.file ? `/uploads/${req.file.filename}` : undefined;
 
       const updatedUser = await Users.findByIdAndUpdate(
@@ -96,8 +96,8 @@ export const updateUser = async (req, res) => {
          user: updatedUser,
       });
 
-      if (olfProfilePicPath && fs.existsSync(olfProfilePicPath)) {
-         fs.unlink(olfProfilePicPath, (err) => {
+      if (oldProfilePicPath && fs.existsSync(oldProfilePicPath)) {
+         fs.unlink(oldProfilePicPath, (err) => {
             if (err) {
                console.error("Error deleting old profile pic:", err);
             }
