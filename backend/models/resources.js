@@ -14,8 +14,9 @@ const resourceSchema = new Schema(
          type: String,
          required: [true, "Resource should be from a department"],
       },
-      budgetAllocated: {
-         type: Number,
+      status: {
+         type: String,
+         enum: ["available", "inuse"],
          required: [true, "Resource should have a budget allocated"],
       },
       imageUrl: {

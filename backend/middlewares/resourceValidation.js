@@ -7,7 +7,7 @@ const resourceSchema = yup
       title: yup.string().min(3).max(100).required("Title is required"),
       description: yup.string().min(10).max(500).required("Description is required"),
       department: yup.string().min(3).max(100).required("Department is required"),
-      budgetAllocated: yup.number().required("Budget is required"),
+      status: yup.string().oneOf(["available", "inuse"]).required("Status is required"),
       imageUrl: yup.string().nullable(),
    })
    .noUnknown();
