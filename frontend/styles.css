@@ -1300,7 +1300,6 @@ nav {
   background-color: #0056b3;
 }
 
-
 .resource-container {
   max-width: 800px;
   margin: 20px auto;
@@ -1382,6 +1381,7 @@ nav {
 }
 
 
+
 .project-container {
   max-width: 1000px;
   margin: 20px auto;
@@ -1460,4 +1460,33 @@ nav {
 }
 .buttons button.edit {
   background: #28a745;
+=======
+.schedule-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #28a745; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.schedule-btn:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: translateY(-2px);
+}
+
+.schedule-btn:active {
+  background-color: #1e7e34; /* Darkest green on click */
+  transform: translateY(0);
+}
+
+/* Optional: Positioning for buttons in the chatbot */
+.bot-message + .schedule-btn {
+  margin-left: 0.5rem; 
+
 }
