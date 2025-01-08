@@ -312,12 +312,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // Toggle chatbot window visibility
   function toggleChat() {
     const chatbotWindow = document.getElementById("chatbot-window");
-    chatbotWindow.style.display =
-      chatbotWindow.style.display === "none" ? "flex" : "none";
-  }
+    chatbotWindow.style.display = chatbotWindow.style.display === "none" ? "flex" : "none";
+}
 
-  // Handle sending a message
-  function sendMessage(event) {
+// Handle sending a message
+function sendMessage(event) {
     if (event.type === "keypress" && event.key !== "Enter") return;
 
     const inputField = document.getElementById("chatbot-input");
@@ -328,75 +327,80 @@ document.addEventListener("DOMContentLoaded", function () {
     inputField.value = "";
 
     processUserMessage(message);
-  }
+}
 
-  // Append message to chat window
-  function appendMessage(sender, message) {
+// Append message to chat window
+function appendMessage(sender, message) {
     const chatbotMessages = document.getElementById("chatbot-messages");
     const messageElement = document.createElement("div");
-    messageElement.classList.add(
-      sender === "user" ? "user-message" : "bot-message"
-    );
+    messageElement.classList.add(sender === "user" ? "user-message" : "bot-message");
     messageElement.textContent = message;
     chatbotMessages.appendChild(messageElement);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-  }
 
-  // Process user message and provide response
-  function processUserMessage(message) {
+    if (sender === "bot") {
+        // Add scheduling button for bot responses
+        const scheduleButton = document.createElement("button");
+        scheduleButton.textContent = "Schedule";
+        scheduleButton.classList.add("schedule-btn");
+        scheduleButton.onclick = () => {
+            window.location.href = 'form.html';
+        };
+        chatbotMessages.appendChild(scheduleButton);
+    }
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight; 
+}
+
+// Process user message and provide response
+function processUserMessage(message) {
     const lowerCaseMessage = message.toLowerCase().trim();
-    console.log("Received Message:", lowerCaseMessage); // Debugging line
+    console.log("Received Message:", lowerCaseMessage);  // Debugging line
 
     let response = "";
 
     if (lowerCaseMessage.includes("location")) {
-      const location = lowerCaseMessage.split("location")[1]?.trim();
-      console.log("Extracted Location:", location);
-      response = getProjectsForLocation(location);
+        const location = lowerCaseMessage.split("location")[1]?.trim();
+        console.log("Extracted Location:", location);  
+        response = getProjectsForLocation(location);
     } else if (lowerCaseMessage.includes("resource")) {
-      const resource = lowerCaseMessage.split("resource")[1]?.trim();
-      console.log("Extracted Resource:", resource);
-      response = getResourceStatus(resource);
+        const resource = lowerCaseMessage.split("resource")[1]?.trim();
+        console.log("Extracted Resource:", resource);  
+        response = getResourceStatus(resource);
     } else {
-      response =
-        "I'm sorry, I didn't understand that. Please specify a valid location or resource.";
+        response = "I'm sorry, I didn't understand that. Please specify a valid location or resource.";
     }
 
     appendMessage("bot", response);
-  }
+}
 
-  function getProjectsForLocation(location) {
+
+function getProjectsForLocation(location) {
     const normalizedLocation = location.toLowerCase();
-    console.log("Normalized Location:", normalizedLocation);
+    console.log("Normalized Location:", normalizedLocation); 
     const projects = projectsData[normalizedLocation];
     if (projects && projects.length > 0) {
-      return projects
-        .map((project) => `${project.name} - ${project.status}`)
-        .join("\n");
+        return projects.map(project => `${project.name} - ${project.status}`).join("\n");
     } else {
-      return "No projects found for the specified location.";
+        return "No projects found for the specified location.";
     }
-  }
+}
 
-  function getResourceStatus(resource) {
-    console.log("Requested Resource:", resource);
+function getResourceStatus(resource) {
+    console.log("Requested Resource:", resource); 
     const status = resourcesData[resource];
     if (status) {
-      return `${resource} is currently ${status}.`;
+        return `${resource} is currently ${status}.`;
     } else {
-      return "Resource not found.";
+        return "Resource not found.";
     }
-  }
+}
 
-  // Initialize chatbot button click event
-  document
-    .getElementById("chatbot-button")
-    .addEventListener("click", toggleChat);
-  document
-    .getElementById("chatbot-input")
-    .addEventListener("keypress", sendMessage);
-  document.getElementById("send-button").addEventListener("click", sendMessage);
-  document.getElementById("close-button").addEventListener("click", toggleChat);
+
+
+// Initialize chatbot button click event
+document.getElementById("chatbot-button").addEventListener("click", toggleChat);
+document.getElementById("chatbot-input").addEventListener("keypress", sendMessage);
+document.getElementById("send-button").addEventListener("click", sendMessage);
+document.getElementById("close-button").addEventListener("click", toggleChat);
 
   // Task Management Function
   window.addTask = function () {
