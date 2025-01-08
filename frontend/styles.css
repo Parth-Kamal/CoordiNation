@@ -1460,7 +1460,8 @@ nav {
 }
 .buttons button.edit {
   background: #28a745;
-=======
+}
+
 .schedule-btn {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -1482,11 +1483,5 @@ nav {
 
 .schedule-btn:active {
   background-color: #1e7e34; /* Darkest green on click */
-  transform: translateY(0);
-}
-
-/* Optional: Positioning for buttons in the chatbot */
-.bot-message + .schedule-btn {
-  margin-left: 0.5rem; 
-
+  transform: translateY(0); 
 }
