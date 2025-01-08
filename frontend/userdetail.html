@@ -68,7 +68,6 @@
       #cancel-button:hover {
         background-color: #abc4ff;
       }
-      
     </style>
   </head>
   <body>
@@ -83,7 +82,11 @@
     <header class="navbar">
       <nav class="company-navbar">
         <div class="company-navbar-left">
-          <img src="./images/logo.png" alt="Company Logo" class="company-logo" />
+          <img
+            src="./images/logo.png"
+            alt="Company Logo"
+            class="company-logo"
+          />
           <span class="company-name">CitySyncIndia</span>
         </div>
         <div class="company-navbar-right">
@@ -101,10 +104,16 @@
         <li><a href="./index.html#dashboard" class="nav-link">Dashboard</a></li>
         <li><a href="./index.html#tasks" class="nav-link">Tasks</a></li>
         <li><a href="./index.html#projects" class="nav-link">Projects</a></li>
-        <li><a href="./index.html#resource-management" class="nav-link">Resources</a></li>
+        <li>
+          <a href="./index.html#resource-management" class="nav-link"
+            >Resources</a
+          >
+        </li>
         <li><a href="./index.html#calendar" class="nav-link">Calendar</a></li>
         <li><a href="userdetail.html" class="nav-link">Profiles</a></li>
-        <li><a href="./index.html#map-section" class="nav-link">Location</a></li>
+        <li>
+          <a href="./index.html#map-section" class="nav-link">Location</a>
+        </li>
         <li><a href="./index.html#documents" class="nav-link">Documents</a></li>
         <li><a href="./index.html#forum" class="nav-link">Forum</a></li>
         <li>
@@ -117,7 +126,7 @@
         <div class="profile-pic-container">
           <img
             id="profilePic"
-            src="https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small_2x/profile-icon-design-free-vector.jpg"
+            src="https://cdn-icons-png.freepik.com/512/3682/3682323.png"
             alt="Profile Picture"
           />
         </div>
@@ -191,19 +200,16 @@
         document.getElementById("bio-input").value = user.bio || "";
       });
 
-
       const profilePic = document.getElementById("profilePic");
       if (user && user.profilePic) {
         profilePic.src = `http://localhost:8000${user.profilePic}`;
       }
 
-      
       document
         .getElementById("edit-form")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
 
-          
           const formData = new FormData();
           formData.append("name", document.getElementById("name").value);
           formData.append(
@@ -236,7 +242,6 @@
               document.getElementById("department").innerText =
                 result.user.department;
 
-              
               if (result.user.profilePic) {
                 profilePic.src = `http://localhost:8000${result.user.profilePic}`;
               }
@@ -260,7 +265,6 @@
           }
         });
 
-        
       const cancelButton = document.getElementById("cancel-button");
       cancelButton.addEventListener("click", () => {
         editSection.style.display = "none";

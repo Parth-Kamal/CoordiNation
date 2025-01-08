@@ -170,41 +170,48 @@
       <!-- SOON -->
 
       <!-- Projects Section -->
-      <section id="projects" class="section">
-        <div class="container">
-          <h2>Projects</h2>
-          <div id="projectList" class="card">
-            <h3>Ongoing Projects</h3>
-            <ul>
-              <li>Road Expansion - <strong>Lead: Public Works</strong></li>
-              <li>
-                Urban Greenery - <strong>Lead: Environmental Dept.</strong>
-              </li>
-              <li>
-                Smart Water System - <strong>Lead: Water Resources</strong>
-              </li>
-            </ul>
+      <div class="project-container">
+        <h1>Project Management</h1>
+        <div id="create-project-section" class="hidden">
+          <h2>Create Project</h2>
+          <div class="form-group">
+            <label for="projectName">Project Name</label>
+            <input
+              type="text"
+              id="projectName"
+              placeholder="Enter project name"
+            />
           </div>
+          <div class="form-group">
+            <label for="projectDescription">Project Description</label>
+            <textarea
+              id="projectDescription"
+              rows="3"
+              placeholder="Enter project description"
+            ></textarea>
+          </div>
+          <p><strong>Admin Name:</strong> <span id="username"></span></p>
+          <p><strong>Department:</strong> <span id="department"></span></p>
+          <div class="form-group">
+            <label for="duration">Duration</label>
+            <input
+              type="text"
+              id="duration"
+              placeholder="Enter project duration"
+            />
+          </div>
+          <button class="project-button" onclick="createProject()">
+            Create Project
+          </button>
         </div>
-      </section>
+
+        <div class="projects" id="projects-section">
+          <h2>All Projects</h2>
+          <!-- Projects will be dynamically rendered here -->
+        </div>
+      </div>
 
       <!-- Resource Management Section -->
-      <!-- <section id="resource-management" class="section">
-        <div class="container">
-          <h2>Resource Management</h2>
-          <button class="btn primary-btn" onclick="addResource()">
-            Add Resource
-          </button>
-          <div id="resourceList" class="card">
-            <h3>Available Resources</h3>
-            <ul>
-              <li>Excavator - <strong>Status: Available</strong></li>
-              <li>Water Pump - <strong>Status: In Use</strong></li>
-              <li>Surveying Equipment - <strong>Status: Available</strong></li>
-            </ul>
-          </div>
-        </div>
-      </section> -->
 
       <div class="resource-container">
         <h1>Resource Management</h1>
@@ -269,15 +276,6 @@
         </div>
       </div>
 
-      <!-- Calendar Section -->
-      <!-- <section id="calendar" class="section">
-        <div class="container">
-          <h2>Event Calendar</h2>
-          <div id="calendarContainer" class="card">
-            <div id="calendar"></div>
-          </div>
-        </div>
-      </section> -->
 
       <div class="calendar-container">
         <!-- Calendar Section -->
@@ -412,6 +410,100 @@
     ></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
+
+    <script>
+      const userData = JSON.parse(localStorage.getItem("user"));
+      const projectsSection = document.getElementById("projects-section");
+      const createProjectSection = document.getElementById(
+        "create-project-section"
+      );
+      let projects = JSON.parse(localStorage.getItem("projects")) || [];
+
+      // Check if the user is an admin
+      if (userData?.role === "admin") {
+        createProjectSection.classList.remove("hidden");
+      }
+
+      if (userData) {
+        document.getElementById("username").innerText = userData.name;
+        document.getElementById("department").innerText = userData.department;
+      }
+
+      let editIndex = null; // To track the index of the project being edited
+
+      function renderProjects() {
+        projectsSection.innerHTML = "<h2>All Projects</h2>";
+        projects.forEach((project, index) => {
+          const projectCard = document.createElement("div");
+          projectCard.className = "project-card";
+          projectCard.innerHTML = `
+      <h3>${project.name}</h3>
+      <p><strong>Description:</strong> ${project.description}</p>
+      <p><strong>Admin:</strong> ${project.admin}</p>
+      <p><strong>Duration:</strong> ${project.duration}</p>
+    `;
+
+          if (userData?.role === "admin") {
+            projectCard.innerHTML += `
+        <div class="buttons">
+          <button class="edit" onclick="editProject(${index})">Edit</button>
+          <button onclick="deleteProject(${index})">Delete</button>
+        </div>
+      `;
+          }
+
+          projectsSection.appendChild(projectCard);
+        });
+      }
+
+      function createProject() {
+        const name = document.getElementById("projectName").value;
+        const description = document.getElementById("projectDescription").value;
+        const admin = document.getElementById("username").innerText;
+        const duration = document.getElementById("duration").value;
+
+        if (!name || !description || !admin || !duration) {
+          alert("Please fill out all fields.");
+          return;
+        }
+
+        if (editIndex !== null) {
+          // Update the existing project
+          projects[editIndex] = { name, description, admin, duration };
+          editIndex = null; // Reset editIndex
+        } else {
+          // Add a new project
+          projects.push({ name, description, admin, duration });
+        }
+
+        localStorage.setItem("projects", JSON.stringify(projects));
+        renderProjects();
+
+        // Clear the form
+        document.getElementById("projectName").value = "";
+        document.getElementById("projectDescription").value = "";
+        document.getElementById("duration").value = "";
+      }
+
+      function editProject(index) {
+        const project = projects[index];
+        document.getElementById("projectName").value = project.name;
+        document.getElementById("projectDescription").value =
+          project.description;
+        document.getElementById("duration").value = project.duration;
+
+        editIndex = index; // Set the index of the project being edited
+      }
+
+      function deleteProject(index) {
+        projects.splice(index, 1);
+        localStorage.setItem("projects", JSON.stringify(projects));
+        renderProjects();
+      }
+
+      // Render projects on page load
+      renderProjects();
+    </script>
 
     <script>
       const apiBaseUrl = "http://localhost:8000/api/resources";
