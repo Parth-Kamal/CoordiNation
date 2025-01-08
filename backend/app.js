@@ -10,6 +10,7 @@ dotenv.config();
 import { protectedRoute } from "./middlewares/protectedRoute.js";
 import auth from "./routes/auth.js";
 import contact from "./routes/contact.js";
+import resources from "./routes/resources.js";
 import tasks from "./routes/tasks.js";
 import globalErrorHandler from "./utils/globalErrorHandler.js";
 
@@ -34,6 +35,7 @@ app.use("/auth", auth);
 app.use(protectedRoute);
 
 app.use("/api/tasks", tasks);
+app.use("/api/resources",resources);
 
 app.all("*", (req, res) => {
    res.status(404).json({

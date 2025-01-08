@@ -6,9 +6,9 @@ import {
    getAllResources,
    getResource,
    updateResource,
-} from "../controllers/resources";
-import { adminRoute } from "../middlewares/protectedRoute";
-import { resourceValidation } from "../middlewares/resourceValidation";
+} from "../controllers/resources.js";
+import { adminRoute } from "../middlewares/protectedRoute.js";
+import { resourceValidation } from "../middlewares/resourceValidation.js";
 
 const router = Router();
 
@@ -19,3 +19,5 @@ router
    .get(getResource)
    .put(adminRoute, resourceValidation, updateResource)
    .delete(adminRoute, deleteResource);
+
+export default router;

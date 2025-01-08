@@ -19,10 +19,7 @@ const resourceSchema = new Schema(
          enum: ["available", "inuse"],
          required: [true, "Resource should have a budget allocated"],
       },
-      imageUrl: {
-         type: String,
-         default: null,
-      },
+      
    },
    { timestamps: true },
 );

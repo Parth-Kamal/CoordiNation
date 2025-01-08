@@ -1,4 +1,4 @@
-import Resources from "../models/resources";
+import Resources from "../models/resources.js";
 
 export const getAllResources = async (req, res, next) => {
    try {
@@ -30,13 +30,12 @@ export const getResource = async (req, res, next) => {
 
 export const createResource = async (req, res, next) => {
    try {
-      const { title, description, department, budgetAllocated, imageUrl } = req.body;
+      const { title, description, department, status } = req.body;
       const resource = await Resources.create({
          title,
          description,
          department,
-         budgetAllocated,
-         imageUrl,
+         status,
       });
       res.status(201).json({ message: "Resource created successfully", resource, success: true });
    } catch (error) {
@@ -46,12 +45,12 @@ export const createResource = async (req, res, next) => {
 
 export const updateResource = async (req, res, next) => {
    try {
-      const { title, description, department, budgetAllocated, imageUrl } = req.body;
+      const { title, description, department, status } = req.body;
       const resource = await Resources.findById(req.params.id);
       if (!resource) {
          return res.status(404).json({ message: "Resource not found", success: false });
       }
-      await resource.updateOne({ title, description, department, budgetAllocated, imageUrl });
+      await resource.updateOne({ title, description, department, status });
       res.status(200).json({ message: "Resource updated successfully", resource, success: true });
    } catch (error) {
       next(error);

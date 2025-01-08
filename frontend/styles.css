@@ -1051,9 +1051,11 @@ nav {
 }
 
 .contact-card label {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   font-weight: bold;
   color: #203865;
+  font-size: 17px;
+  margin-top: 5px;
 }
 
 .contact-card input,
@@ -1295,6 +1297,86 @@ nav {
 }
 .show-more-button:hover {
   background-color: #0056b3;
+}
+
+.resource-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff; /* White background for sections */
+  border: 1px solid #cce7ff; /* Light blue border */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.resource-container h1,
+.resource-container h2 {
+  color: #003366;
+  text-align: start;
+}
+
+#resource-form input,
+#resource-form textarea,
+#resource-form select,
+.resource-button {
+  font-family: "Outfit", serif;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #cce7ff; /* Light blue border */
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+#department{
+  max-width: 100%;
+}
+
+.resource-button {
+  background-color: #007bff; 
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  transition: background-color 0.3s ease;
+}
+
+.resource-edit-button , .resource-delete-button{
+  background-color: #007bff; 
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  font-family: "Outfit", serif;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #cce7ff; /* Light blue border */
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+.resource-button:hover ,.resource-edit-button:hover , .resource-delete-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.form-section {
+  margin-bottom: 30px;
+}
+
+.resource {
+  border: 1px solid #cce7ff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f9fcff; /* Slightly off-white background */
+}
+
+.resource .resource-button {
+  margin-left: 10px;
+}
+
+.hidden {
+  display: none;
 }
 .schedule-btn {
   display: inline-block;
