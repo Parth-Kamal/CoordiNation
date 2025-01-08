@@ -585,7 +585,7 @@ footer {
   margin-right: 10px;
 }
 
-#department {
+#department ,#state {
   width: 100%;
   max-width: 400px;
   padding: 10px;
@@ -599,9 +599,10 @@ footer {
   cursor: pointer;
   transition: border-color 0.3s ease;
   margin-bottom: 4px;
+  margin-bottom: 15px;
 }
 
-#department::after {
+#department::after ,#state::after{
   content: "▼";
   font-size: 12px;
   color: #888;
@@ -612,14 +613,14 @@ footer {
   pointer-events: none;
 }
 
-#department:focus {
+#department:focus ,#state:focus {
   border-color: var(--dark);
   outline: none;
 }
 
 
 @media (max-width: 600px) {
-  #department {
+  #department, #state {
     max-width: 100%;
     padding: 8px;
     font-size: 14px;
@@ -1378,6 +1379,89 @@ nav {
 .hidden {
   display: none;
 }
+
+
+
+.project-container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+.project-containe h1 {
+  text-align: start;
+  color: #333;
+}
+#create-project-section  h2{
+  text-align: start;
+}
+.projects h2{
+  text-align: start;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+.project-button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.project-button:hover {
+  background: #0056b3;
+}
+.projects {
+  margin-top: 30px;
+}
+.project-card {
+  background: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.project-card h3 {
+  margin: 0 0 10px;
+  color: #333;
+}
+.project-card p {
+  margin: 5px 0;
+  color: #555;
+}
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+.buttons button {
+  padding: 7px 15px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #dc3545;
+}
+.buttons button.edit {
+  background: #28a745;
+}
+
 .schedule-btn {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -1399,10 +1483,5 @@ nav {
 
 .schedule-btn:active {
   background-color: #1e7e34; /* Darkest green on click */
-  transform: translateY(0);
-}
-
-/* Optional: Positioning for buttons in the chatbot */
-.bot-message + .schedule-btn {
-  margin-left: 0.5rem; 
+  transform: translateY(0); 
 }
