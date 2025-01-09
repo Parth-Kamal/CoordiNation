@@ -673,6 +673,7 @@
     </script>
 
     <script>
+      if (!localStorage.getItem("events")){
       localStorage.setItem("events", JSON.stringify([
         {
           startDate: "2025-01-10",
@@ -736,7 +737,7 @@
           description:
             "Review the accomplishments and challenges of the year, and plan for the next year.",
         },
-      ]));
+      ]));}
 
       // Variables to track the current year and month
       let currentYear = new Date().getFullYear();

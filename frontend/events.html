@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Manager</title>
+</head>
+<body>
+  <h1>Event Manager</h1>
+  <form id="eventForm">
+    <label for="name">Event Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate" required><br><br>
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="endDate" required><br><br>
+
+    <label for="startTime">Start Time:</label>
+    <input type="time" id="startTime" name="startTime" required><br><br>
+
+    <label for="endTime">End Time:</label>
+    <input type="time" id="endTime" name="endTime" required><br><br>
+
+    <label for="description">Description:</label><br>
+    <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+
+    <button type="button" id="saveEvent">Save Event</button>
+    <button type="button" id="cancelEdit" style="display: none;">Cancel Edit</button>
+  </form>
+
+  <h2>Existing Events</h2>
+  <ul id="eventList"></ul>
+
+  <script>
+    const eventForm = document.getElementById('eventForm');
+    const eventList = document.getElementById('eventList');
+    const saveButton = document.getElementById('saveEvent');
+    const cancelEditButton = document.getElementById('cancelEdit');
+    let editIndex = null; // To track the index of the event being edited
+
+    // Load events from localStorage
+    function loadEvents() {
+      const events = JSON.parse(localStorage.getItem('events')) || [];
+      eventList.innerHTML = '';
+      events.forEach((event, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${event.name} (${event.startDate} - ${event.endDate}): ${event.description}`;
+
+        // Edit Button
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.style.marginLeft = '10px';
+        editButton.addEventListener('click', () => editEvent(index));
+
+        // Delete Button
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.style.marginLeft = '10px';
+        deleteButton.addEventListener('click', () => deleteEvent(index));
+
+        li.appendChild(editButton);
+        li.appendChild(deleteButton);
+        eventList.appendChild(li);
+      });
+    }
+
+    // Save or Update event to localStorage
+    function saveEvent() {
+      const events = JSON.parse(localStorage.getItem('events')) || [];
+      const newEvent = {
+        name: eventForm.name.value,
+        startDate: eventForm.startDate.value,
+        endDate: eventForm.endDate.value,
+        start: `T${eventForm.startTime.value}:00`,
+        end: `T${eventForm.endTime.value}:00`,
+        description: eventForm.description.value
+      };
+
+      if (editIndex !== null) {
+        // Update existing event
+        events[editIndex] = newEvent;
+        editIndex = null;
+        saveButton.textContent = 'Save Event'; // Reset button text
+        cancelEditButton.style.display = 'none';
+      } else {
+        // Add new event
+        events.push(newEvent);
+      }
+
+      localStorage.setItem('events', JSON.stringify(events));
+      eventForm.reset();
+      loadEvents();
+    }
+
+    // Edit event from localStorage
+    function editEvent(index) {
+      const events = JSON.parse(localStorage.getItem('events')) || [];
+      const event = events[index];
+
+      // Populate form with event data
+      eventForm.name.value = event.name;
+      eventForm.startDate.value = event.startDate;
+      eventForm.endDate.value = event.endDate;
+      eventForm.startTime.value = event.start.slice(1, 6); // Extract HH:MM
+      eventForm.endTime.value = event.end.slice(1, 6); // Extract HH:MM
+      eventForm.description.value = event.description;
+
+      editIndex = index; // Set index of the event being edited
+      saveButton.textContent = 'Update Event';
+      cancelEditButton.style.display = 'inline'; // Show cancel button
+    }
+
+    // Cancel editing
+    function cancelEdit() {
+      editIndex = null;
+      eventForm.reset();
+      saveButton.textContent = 'Save Event';
+      cancelEditButton.style.display = 'none';
+    }
+
+    // Delete event from localStorage
+    function deleteEvent(index) {
+      const events = JSON.parse(localStorage.getItem('events')) || [];
+      events.splice(index, 1);
+      localStorage.setItem('events', JSON.stringify(events));
+      loadEvents();
+    }
+
+    // Event listeners
+    saveButton.addEventListener('click', saveEvent);
+    cancelEditButton.addEventListener('click', cancelEdit);
+
+    // Load events on page load
+    loadEvents();
+  </script>
+</body>
+</html>
