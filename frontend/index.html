@@ -674,8 +674,8 @@
     </script>
 
     <script>
-      // Event Data
-      const events = [
+      if (!localStorage.getItem("events")){
+      localStorage.setItem("events", JSON.stringify([
         {
           startDate: "2025-01-10",
           endDate: "2025-01-10",
@@ -738,7 +738,7 @@
           description:
             "Review the accomplishments and challenges of the year, and plan for the next year.",
         },
-      ];
+      ]));}
 
       // Variables to track the current year and month
       let currentYear = new Date().getFullYear();
@@ -758,7 +758,7 @@
         const eventDisplay = document.getElementById("event-display");
         eventDisplay.innerHTML = ""; // Clear previous content
 
-        const selectedEvents = events.filter((event) =>
+        const selectedEvents = JSON.parse(localStorage.getItem("events")).filter((event) =>
           isDateInRange(selectedDate, event.startDate, event.endDate)
         );
 
@@ -863,7 +863,7 @@
               }
 
               // Highlight dates that have events
-              events.forEach((event) => {
+              JSON.parse(localStorage.getItem("events")).forEach((event) => {
                 if (isDateInRange(fullDate, event.startDate, event.endDate)) {
                   td.classList.add("event-range");
                 }
