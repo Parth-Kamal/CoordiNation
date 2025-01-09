@@ -211,7 +211,7 @@
             </div>
             <div>
               <label for="department">Department:</label>
-              <input type="text" id="department" required />
+              <input type="text" id="department-re" required />
             </div>
             <div>
               <label for="status">Status:</label>
@@ -517,7 +517,6 @@
         const token = getAuthToken();
         const res = await fetch(apiBaseUrl, {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
@@ -534,7 +533,7 @@
         const id = document.getElementById("resource-id").value;
         const title = document.getElementById("title").value.trim();
         const description = document.getElementById("description").value.trim();
-        const department = document.getElementById("department").value.trim();
+        const department = document.getElementById("department-re").value.trim();
         const status = document.getElementById("status").value;
 
         if (!title || !description || !department || !status) {
