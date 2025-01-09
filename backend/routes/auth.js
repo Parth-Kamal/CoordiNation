@@ -12,6 +12,6 @@ const router = Router();
 
 router.route("/register").post(registerValidation, register);
 router.route("/login").post(loginValidation, login);
-router.route("/update").put(protectedRoute, updateValidation, uploadProfilePic, updateUser);
+router.route("/update").put(protectedRoute, uploadProfilePic, updateValidation, updateUser);
 
 export default router;
