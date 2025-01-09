@@ -101,29 +101,9 @@
         </div>
       </section>
       <!-- Task Management Section  -->
-      <!-- <section id="tasks" class="section">
-        <div class="container">
-          <h2>Task Management</h2>
-          <div class="add-task-form">
-            <input type="text" id="taskName" placeholder="Enter task name" />
-            <select id="taskStatus">
-              <option value="Pending">Pending</option>
-              <option value="Ongoing">Ongoing</option>
-            </select>
-            <button class="btn primary-btn" onclick="addTask()">
-              Add Task
-            </button>
-          </div>
-          <div id="taskList" class="card">
-            <h3>Active Tasks</h3>
-            <ul>
-            </ul>
-          </div>
-        </div>
-      </section> -->
 
       <div class="task-container">
-        <div class="form-container">
+        <div class="form-container hidden" id="task-form">
           <h1>Create New Task</h1>
           <div class="input-group">
             <label for="task-title">Task Title</label>
@@ -295,7 +275,7 @@
             <h3>Event Details</h3>
             <p>Select a date to see the events</p>
           </div>
-          <div id="add-event">
+          <div class="hidden" id="add-event">
             <a class="button" id="add-event-button" href="/events.html">Add Event</a>
           </div>
         </div>
@@ -416,6 +396,23 @@
     ></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
+    <script>
+      const userData_task_event = JSON.parse(localStorage.getItem("user"));
+      const add_event = document.getElementById("add-event");
+      if (userData_task_event?.role === "admin") {
+        add_event.classList.remove("hidden")
+      }
+    </script>
+
+    <script>
+      const userData_task = JSON.parse(localStorage.getItem("user"));
+      const task_form = document.getElementById("task-form");
+      
+      if (userData_task?.role === "admin") {
+        task_form.classList.remove("hidden");
+        add_event.classList.remove("hidden")
+      }
+    </script>
 
     <script>
       const userData = JSON.parse(localStorage.getItem("user"));
