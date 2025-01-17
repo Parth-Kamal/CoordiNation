@@ -74,9 +74,13 @@
           />
           <select id="department" required>
             <option value="">Select Department</option>
-            <option value="Water Pipeline Department">Water Pipeline Department</option>
+            <option value="Water Pipeline Department">
+              Water Pipeline Department
+            </option>
             <option value="Road Department">Road Department</option>
-            <option value="Gas Pipeline Department">Gas Pipeline Department</option>
+            <option value="Gas Pipeline Department">
+              Gas Pipeline Department
+            </option>
           </select>
           <select id="state" required>
             <option value="">Select Region</option>
@@ -110,9 +114,13 @@
             <option value="Uttar Pradesh">Uttar Pradesh</option>
             <option value="Uttarakhand">Uttarakhand</option>
             <option value="West Bengal">West Bengal</option>
-            <option value="Andaman & Nicobar (UT)">Andaman & Nicobar (UT)</option>
+            <option value="Andaman & Nicobar (UT)">
+              Andaman & Nicobar (UT)
+            </option>
             <option value="Chandigarh (UT)">Chandigarh (UT)</option>
-            <option value="Dadra & Nagar Haveli (UT)">Dadra & Nagar Haveli (UT)</option>
+            <option value="Dadra & Nagar Haveli (UT)">
+              Dadra & Nagar Haveli (UT)
+            </option>
             <option value="Daman & Diu (UT)">Daman & Diu (UT)</option>
             <option value="Lakshadweep (UT)">Lakshadweep (UT)</option>
             <option value="Puducherry (UT)">Puducherry (UT)</option>
@@ -120,7 +128,7 @@
 
           <div class="role-select">
             <input type="radio" id="admin" name="role" value="admin" required />
-            <label for="admin">Admin</label>
+            <label for="admin">Leader</label>
             <input
               type="radio"
               id="official"
@@ -128,7 +136,9 @@
               value="official"
               required
             />
-            <label for="official">Official</label>
+            <label for="official">Member</label>
+            <input type="radio" id="user" name="role" value="user" required />
+            <label for="user">User</label>
           </div>
           <button type="submit">Sign Up</button>
         </form>
@@ -185,6 +195,7 @@
             });
             const result = await response.json();
             showAlert(result.message);
+            window.location.href="login.html";
           } catch (error) {
             console.error(error);
             showAlert("Failed to register");
@@ -205,12 +216,19 @@
               body: JSON.stringify({ email, password }),
             });
             const result = await response.json();
+
             if (result.success) {
               localStorage.setItem("token", result.token);
               localStorage.setItem("user", JSON.stringify(result.user));
 
               showAlert("Login successful");
-              window.location.href = "index.html";
+
+              // Redirect based on role
+              if (result.user.role === "user") {
+                window.location.href = "profile.html";
+              } else {
+                window.location.href = "index.html";
+              }
             } else {
               showAlert(result.message);
             }

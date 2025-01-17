@@ -20,7 +20,7 @@ const userSchema = new Schema(
          type: String,
          default: "",
       },
-      role: { type: String, enum: ["admin", "official"], default: "official" },
+      role: { type: String, enum: ["admin","user","official"], default: "official" },
       profilePic: { type: String, default: null },
    },
    { timestamps: true },
