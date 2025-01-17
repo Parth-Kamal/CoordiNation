@@ -333,9 +333,12 @@ footer {
 .navbar {
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0;
   background-color: var(--dark);
   color: white;
   padding: 10px;
+  z-index: 10000;
 }
 
 
