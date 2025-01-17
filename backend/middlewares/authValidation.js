@@ -8,7 +8,7 @@ const registerSchema = yup
       email: yup.string().email("Invalid email format").max(100).required("Email is required"),
       password: yup.string().min(8).max(20).required("Password is required"),
       department: yup.string().required("Department is required"),
-      role: yup.string().oneOf(["admin", "official"]).default("official"),
+      role: yup.string().oneOf(["admin","user", "official"]).default("official"),
       profilePic: yup.string().nullable(),
    })
    .noUnknown();

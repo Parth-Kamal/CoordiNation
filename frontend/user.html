@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CoordiNation</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General Styling */
+      body {
+        margin: 0;
+        font-family: "Outfit", sans-serif;
+      }
+
+      .navbar {
+        background-color: #0077b6;
+        color: #fff;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+      }
+
+      .company-navbar-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .company-logo {
+        height: 40px;
+        margin-right: 10px;
+      }
+
+      .company-name {
+        font-size: 25px;
+        font-weight: bold;
+      }
+
+      .company-navbar-right {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-list {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: #fff;
+        margin: 0 10px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: #005f8a;
+      }
+
+      .burger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        z-index: 15;
+        background-color: white; 
+      }
+
+      .burger span {
+        height: 3px;
+        width: 25px;
+        background-color: black;
+        color: black;
+        margin: 4px 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      /* Active burger icon styling */
+      .burger.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .burger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .burger.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .company-navbar-right {
+          display: none;
+          flex-direction: column;
+          align-items: center;
+          position: absolute;
+          top: 60px;
+          right: 0;
+          background-color: #0077b6;
+          width: 100%;
+          z-index: 10;
+          border-top: 2px solid #005f8a;
+        }
+
+        .company-navbar-right.active {
+          display: flex;
+        }
+
+        .nav-list {
+          flex-direction: column;
+          width: 100%;
+          text-align: center;
+          padding: 0;
+        }
+
+        .nav-link {
+          margin: 5px 0;
+          width: 100%;
+          padding: 10px 0;
+          background-color: #005f8a;
+          border-bottom: 1px solid #0077b6;
+        }
+
+        .burger {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <nav class="company-navbar">
+        <div class="company-navbar-left">
+          <img
+            src="./images/logo.png"
+            alt="Company Logo"
+            class="company-logo"
+          />
+          <span class="company-name">CoordiNation</span>
+        </div>
+        <div class="company-navbar-right">
+          <ul class="nav-list">
+            <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+            <li><a href="#calendar" class="nav-link">Calendar</a></li>
+            <li><a href="profile.html" class="nav-link">Profiles</a></li>
+            <li><a href="#map-section" class="nav-link">Location</a></li>
+            <li><a href="#contact" class="nav-link">Contact Us</a></li>
+
+            <li><a href="#forum" class="nav-link">Forum</a></li>
+            <li>
+              <a href="/login.html" id="logout-link" class="nav-link">LogOut</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="burger" onclick="toggleMenu()">
+        <img src="./images/hamburger.webp" alt="">
+      </div>
+    </header>
+    <script>
+      function toggleMenu() {
+        const navbarRight = document.querySelector(".company-navbar-right");
+        const burger = document.querySelector(".burger");
+
+        navbarRight.classList.toggle("active");
+        burger.classList.toggle("active"); // Add this line to toggle the burger's appearance
+      }
+    </script>
+  </body>
+</html>
