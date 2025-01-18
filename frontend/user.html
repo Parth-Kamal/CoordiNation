@@ -223,37 +223,12 @@
     </header>
 
     <div class="container" id="dashboard">
-      <h2>Tasks</h2>
+      <h2>Projects</h2>
       <div class="task-section" id="taskSection">
         <!-- Task Cards Will Be Rendered Here -->
       </div>
     </div>
 
-    <div id="chatbot">
-      <div id="chatbot-button" onclick="toggleChat()">
-        <img src="./images/bot.png" alt="Chatbot" />
-      </div>
-
-      <div id="chatbot-window" style="display: none">
-        <div id="chatbot-header">
-          <h4>How can I help you?</h4>
-          <button id="close-button" onclick="toggleChat()">×</button>
-        </div>
-
-        <!-- Chatbot messages section -->
-        <div id="chatbot-messages"></div>
-
-        <!-- Input section to type messages -->
-        <div id="chatbot-input-container">
-          <input
-            type="text"
-            id="chatbot-input"
-            placeholder="Type your message..."
-          />
-          <button id="send-button">Send</button>
-        </div>
-      </div>
-    </div>
 
     <div class="calendar-container">
       <!-- Calendar Section -->
@@ -350,28 +325,22 @@
     <script>
       const tasks = [
         {
-          name: "Build Road A",
+          name: "Road Widening Project",
           department: "Road Department",
           status: "Ongoing",
-          locality: "Locality A",
+          locality: "Ashok Vihar, Saket",
         },
         {
-          name: "Install Pipeline B",
-          department: "Gas Department",
+          name: "Public Park Development ",
+          department: "Road Department",
           status: "Pending",
-          locality: "Locality B",
+          locality: "Ashok Vihar , Saket",
         },
         {
-          name: "Water Supply Maintenance",
-          department: "Water Department",
+          name: "Community Hall Construction",
+          department: "Road Department",
           status: "Ongoing",
-          locality: "Locality C",
-        },
-        {
-          name: "Repair Bridge D",
-          department: "Infrastructure",
-          status: "Pending",
-          locality: "Locality D",
+          locality: "Ashok Vihar, Saket",
         },
       ];
 
