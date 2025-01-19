@@ -198,7 +198,7 @@
     </header>
     <div class="body-container">
       <div class="task-container">
-        <div class="form-container">
+        <div class="form-container hidden">
           <h1>Create New Task</h1>
           <div class="input-group">
             <label for="task-title">Task Title</label>
@@ -241,6 +241,8 @@
 
       window.onload = async () => {
         await fetchTasks();
+        const formContainer = document.getElementsByClassName("form-container")[0];
+        (JSON.parse(localStorage.getItem("user")).role === "admin") && formContainer.classList.remove("hidden")
       };
 
       async function createTask() {

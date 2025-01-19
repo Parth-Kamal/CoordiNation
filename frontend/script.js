@@ -345,7 +345,7 @@ function appendMessage(sender, message) {
         scheduleButton.onclick = () => {
             window.location.href = 'form.html';
         };
-        chatbotMessages.appendChild(scheduleButton);
+        (JSON.parse(localStorage.getItem("user")).role === "admin") && chatbotMessages.appendChild(scheduleButton);
     }
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight; 
 }
